@@ -1,0 +1,34 @@
+<h2>Listing promo codes</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Amount</th>
+      <th>Expires at</th>
+      <th>Is active</th>
+      <th>Radius</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for promo_code <- @promo_codes do %>
+    <tr>
+      <td><%= promo_code.event_id %></td>
+      <td><%= promo_code.amount %></td>
+      <td><%= promo_code.expires_at %></td>
+      <td><%= promo_code.is_active %></td>
+      <td><%= promo_code.radius %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: promo_code_path(@conn, :show, promo_code), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: promo_code_path(@conn, :edit, promo_code), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: promo_code_path(@conn, :delete, promo_code), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New promo code", to: promo_code_path(@conn, :new) %></span>

@@ -18,6 +18,7 @@ defmodule EventPromoCode.Router do
 
     get "/", PageController, :index
     resources "/events", EventController
+    resources "/promo_codes", PromoCodeController
   end
 
   # Other scopes may use custom stacks.

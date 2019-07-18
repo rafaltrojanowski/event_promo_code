@@ -1,0 +1,33 @@
+<h2>Show promo code</h2>
+
+<ul>
+
+  <li>
+    <strong>Event:</strong>
+    <%= @promo_code.event_id %>
+  </li>
+
+  <li>
+    <strong>Amount:</strong>
+    <%= @promo_code.amount %>
+  </li>
+
+  <li>
+    <strong>Expires at:</strong>
+    <%= @promo_code.expires_at %>
+  </li>
+
+  <li>
+    <strong>Is active:</strong>
+    <%= @promo_code.is_active %>
+  </li>
+
+  <li>
+    <strong>Radius:</strong>
+    <%= @promo_code.radius %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: promo_code_path(@conn, :edit, @promo_code) %></span>
+<span><%= link "Back", to: promo_code_path(@conn, :index) %></span>
