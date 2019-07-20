@@ -7,6 +7,7 @@ defmodule EventPromoCode.PromoCode do
     field :expires_at, :utc_datetime
     field :is_active, :boolean, default: true, null: false
     field :radius, :float
+    field :code, :string, null: false
 
     timestamps()
   end

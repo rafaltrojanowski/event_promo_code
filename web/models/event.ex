@@ -6,6 +6,8 @@ defmodule EventPromoCode.Event do
     field :description, :string
     field :latitude, :float
     field :longitude, :float
+    field :start_at, :utc_datetime, null: false
+    field :end_at, :utc_datetime, null: false
 
     timestamps()
   end
