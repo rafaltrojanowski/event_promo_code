@@ -13,6 +13,14 @@ defmodule EventPromoCode.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", EventPromoCode.Api, as: :api do
+    pipe_through :api
+
+    scope "/v1" do
+      resources "/promo_codes", PromoCodeController, only: [:show, :index]
+    end
+  end
+
   scope "/", EventPromoCode do
     pipe_through :browser # Use the default browser stack
 
