@@ -22,6 +22,16 @@
     <%= @event.longitude %>
   </li>
 
+  <li>
+    <strong>Start at:</strong>
+    <%= @event.start_at %>
+  </li>
+
+  <li>
+    <strong>End at:</strong>
+    <%= @event.end_at %>
+  </li>
+
 </ul>
 
 <span><%= link "Edit", to: event_path(@conn, :edit, @event) %></span>

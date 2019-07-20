@@ -17,7 +17,7 @@ defmodule EventPromoCode.Event do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :description, :latitude, :longitude])
-    |> validate_required([:title, :description, :latitude, :longitude])
+    |> cast(params, [:title, :description, :latitude, :longitude, :start_at, :end_at])
+    |> validate_required([:title, :description, :latitude, :longitude, :start_at, :end_at])
   end
 end

@@ -27,6 +27,11 @@
     <%= @promo_code.radius %>
   </li>
 
+  <li>
+    <strong>Code:</strong>
+    <%= @promo_code.code %>
+  </li>
+
 </ul>
 
 <span><%= link "Edit", to: promo_code_path(@conn, :edit, @promo_code) %></span>
