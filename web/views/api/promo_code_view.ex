@@ -11,8 +11,8 @@ defmodule EventPromoCode.Api.PromoCodeView do
       amount: promo_code.amount,
       is_active: promo_code.is_active,
       expires_at: promo_code.expires_at,
-      event_id: promo_code.event_id,
-      radius: promo_code.radius
+      radius: promo_code.radius,
+      event: render_one(promo_code.event, EventPromoCode.Api.EventView, "event.json")
     }
   end
 

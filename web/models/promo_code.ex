@@ -2,12 +2,12 @@ defmodule EventPromoCode.PromoCode do
   use EventPromoCode.Web, :model
 
   schema "promo_codes" do
-    field :event_id, :integer, null: false
     field :amount, :float
     field :expires_at, :utc_datetime
     field :is_active, :boolean, default: true, null: false
     field :radius, :float
     field :code, :string, null: false
+    belongs_to :event, EventPromoCode.Event
 
     timestamps()
   end
