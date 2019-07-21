@@ -24,7 +24,8 @@ defmodule EventPromoCode.PromoCodeController do
         |> put_flash(:info, "Promo code created successfully.")
         |> redirect(to: promo_code_path(conn, :show, promo_code))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        events = Repo.all(Event)
+        render(conn, "new.html", changeset: changeset, events: events)
     end
   end
 
@@ -51,7 +52,8 @@ defmodule EventPromoCode.PromoCodeController do
         |> put_flash(:info, "Promo code updated successfully.")
         |> redirect(to: promo_code_path(conn, :show, promo_code))
       {:error, changeset} ->
-        render(conn, "edit.html", promo_code: promo_code, changeset: changeset)
+        events = Repo.all(Event)
+        render(conn, "edit.html", promo_code: promo_code, changeset: changeset, events: events)
     end
   end
 

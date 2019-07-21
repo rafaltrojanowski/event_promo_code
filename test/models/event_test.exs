@@ -3,7 +3,14 @@ defmodule EventPromoCode.EventTest do
 
   alias EventPromoCode.Event
 
-  @valid_attrs %{description: "some description", latitude: 120.5, longitude: 120.5, title: "some title"}
+  @valid_attrs %{
+    title: "some title",
+    description: "some description",
+    latitude: 120.5,
+    longitude: 120.5,
+    start_at: "2010-04-17 14:00:00.000000Z",
+    end_at: "2010-04-17 14:00:00.000000Z"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

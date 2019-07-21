@@ -2,7 +2,14 @@ defmodule EventPromoCode.EventControllerTest do
   use EventPromoCode.ConnCase
 
   alias EventPromoCode.Event
-  @valid_attrs %{description: "some description", latitude: 120.5, longitude: 120.5, title: "some title"}
+  @valid_attrs %{
+    title: "some title",
+    description: "some description",
+    latitude: 120.5,
+    longitude: 120.5,
+    start_at: "2010-04-17 14:00:00.000000Z",
+    end_at: "2010-04-17 14:00:00.000000Z"
+  }
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -27,7 +34,10 @@ defmodule EventPromoCode.EventControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    event = Repo.insert! %Event{}
+    event = Repo.insert! %Event{
+      start_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC"),
+      end_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC")
+    }
     conn = get conn, event_path(conn, :show, event)
     assert html_response(conn, 200) =~ "Show event"
   end
@@ -39,26 +49,38 @@ defmodule EventPromoCode.EventControllerTest do
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    event = Repo.insert! %Event{}
+    event = Repo.insert! %Event{
+      start_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC"),
+      end_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC")
+    }
     conn = get conn, event_path(conn, :edit, event)
     assert html_response(conn, 200) =~ "Edit event"
   end
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    event = Repo.insert! %Event{}
+    event = Repo.insert! %Event{
+      start_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC"),
+      end_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC")
+    }
     conn = put conn, event_path(conn, :update, event), event: @valid_attrs
     assert redirected_to(conn) == event_path(conn, :show, event)
     assert Repo.get_by(Event, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    event = Repo.insert! %Event{}
+    event = Repo.insert! %Event{
+      start_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC"),
+      end_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC")
+    }
     conn = put conn, event_path(conn, :update, event), event: @invalid_attrs
     assert html_response(conn, 200) =~ "Edit event"
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    event = Repo.insert! %Event{}
+    event = Repo.insert! %Event{
+      start_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC"),
+      end_at: DateTime.from_naive!(~N[2019-10-02 00:00:00], "Etc/UTC")
+    }
     conn = delete conn, event_path(conn, :delete, event)
     assert redirected_to(conn) == event_path(conn, :index)
     refute Repo.get(Event, event.id)
