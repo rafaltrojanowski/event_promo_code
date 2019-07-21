@@ -2,6 +2,7 @@ defmodule EventPromoCode.PromoCodeController do
   use EventPromoCode.Web, :controller
 
   alias EventPromoCode.PromoCode
+  alias EventPromoCode.Event
 
   def index(conn, _params) do
     promo_codes = Repo.all(PromoCode)
@@ -10,7 +11,8 @@ defmodule EventPromoCode.PromoCodeController do
 
   def new(conn, _params) do
     changeset = PromoCode.changeset(%PromoCode{})
-    render(conn, "new.html", changeset: changeset)
+    events = Repo.all(Event)
+    render(conn, "new.html", changeset: changeset, events: events)
   end
 
   def create(conn, %{"promo_code" => promo_code_params}) do
@@ -34,7 +36,9 @@ defmodule EventPromoCode.PromoCodeController do
   def edit(conn, %{"id" => id}) do
     promo_code = Repo.get!(PromoCode, id)
     changeset = PromoCode.changeset(promo_code)
-    render(conn, "edit.html", promo_code: promo_code, changeset: changeset)
+    events = Repo.all(Event)
+    render(conn, "edit.html", promo_code: promo_code, changeset: changeset,
+      events: events)
   end
 
   def update(conn, %{"id" => id, "promo_code" => promo_code_params}) do

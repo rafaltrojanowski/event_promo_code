@@ -8,7 +8,7 @@ defmodule EventPromoCode.Event do
     field :longitude, :float
     field :start_at, :utc_datetime, null: false
     field :end_at, :utc_datetime, null: false
-    has_many :events, EventPromoCode.Event
+    has_many :promo_codes, EventPromoCode.PromoCode
 
     timestamps()
   end

@@ -1,6 +1,7 @@
 <h2>Edit promo code</h2>
 
 <%= render "form.html", changeset: @changeset,
+                        events: @events,
                         action: promo_code_path(@conn, :update, @promo_code) %>
 
 <span><%= link "Back", to: promo_code_path(@conn, :index) %></span>

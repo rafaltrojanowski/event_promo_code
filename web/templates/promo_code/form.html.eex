@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <%= label f, :event_id, class: "control-label" %>
-    <%= number_input f, :event_id, class: "form-control" %>
+    <%= select f, :event_id, Enum.map(@events, &{&1.title, &1.id}), class: "form-control" %>
     <%= error_tag f, :event_id %>
   </div>
 
