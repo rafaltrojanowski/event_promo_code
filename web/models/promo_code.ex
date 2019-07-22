@@ -1,6 +1,9 @@
 defmodule EventPromoCode.PromoCode do
   use EventPromoCode.Web, :model
 
+  alias EventPromoCode.Repo
+  alias EventPromoCode.PromoCode
+
   schema "promo_codes" do
     field :amount, :float
     field :expires_at, :utc_datetime
@@ -19,5 +22,15 @@ defmodule EventPromoCode.PromoCode do
     struct
     |> cast(params, [:event_id, :amount, :expires_at, :is_active, :radius, :code])
     |> validate_required([:event_id, :amount, :expires_at, :is_active, :radius, :code])
+  end
+
+  def by_active(is_active) do
+    query = from PromoCode,
+      where: [is_active: ^is_active],
+      order_by: [asc: :expires_at],
+      select: [:id, :code, :amount, :radius, :expires_at, :event_id, :is_active]
+
+    Repo.all(query)
+    |> Repo.preload(:event)
   end
 end
