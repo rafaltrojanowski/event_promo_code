@@ -2,7 +2,28 @@ defmodule EventPromoCode.Api.PromoCodeControllerTest do
   use EventPromoCode.ConnCase
   import EventPromoCode.Factory
 
-  test "/index returns a list of promo codes" do
+  @create_attrs %{
+    code: "5ncv",
+    amount: 22.20,
+    radius: 500,
+    expires_at: DateTime.utc_now,
+  }
+  @invalid_attrs %{code: nil, amount: nil, radius: nil}
+
+  describe "#create" do
+    test "renders promo code when data is valid", %{conn: conn} do
+      event = insert(:event)
+      conn = post(conn, api_promo_code_path(conn, :create), promo_code: Map.put(@create_attrs, "event_id", event.id))
+      assert %{"id" => id} = json_response(conn, 201)["data"]
+    end
+
+    test "renders errors when data is invalid", %{conn: conn} do
+      conn = post(conn, api_promo_code_path(conn, :create), promo_code: @invalid_attrs)
+      assert json_response(conn, 422)["errors"] != %{}
+    end
+  end
+
+  test "#index returns a list of promo codes" do
     promo_code = insert(:promo_code)
 
     conn = build_conn()

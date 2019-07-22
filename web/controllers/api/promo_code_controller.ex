@@ -2,6 +2,20 @@ defmodule EventPromoCode.Api.PromoCodeController do
   use EventPromoCode.Web, :controller
 
   alias EventPromoCode.PromoCode
+  alias EventPromoCode.Services.PromoCodeCreator
+
+  def create(conn, %{"promo_code" => params}) do
+    case PromoCodeCreator.create(params) do
+      {:ok, promo_code} ->
+        conn
+        |> put_status(:created)
+        |> render("show.json", promo_code: promo_code)
+      {:error, changeset} ->
+        conn
+        |> put_status(422)
+        |> render(EventPromoCode.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
 
   def index(conn, params) do
     changeset = changeset(params)

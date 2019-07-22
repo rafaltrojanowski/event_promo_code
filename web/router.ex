@@ -17,7 +17,7 @@ defmodule EventPromoCode.Router do
     pipe_through :api
 
     scope "/v1" do
-      resources "/promo_codes", PromoCodeController, only: [:show, :index]
+      resources "/promo_codes", PromoCodeController, only: [:show, :index, :create]
     end
   end
 
