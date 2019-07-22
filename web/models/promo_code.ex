@@ -4,6 +4,8 @@ defmodule EventPromoCode.PromoCode do
   alias EventPromoCode.Repo
   alias EventPromoCode.PromoCode
 
+  @derive {Jason.Encoder, except: [:__meta__, :event_id]}
+
   schema "promo_codes" do
     field :amount, :float
     field :expires_at, :utc_datetime

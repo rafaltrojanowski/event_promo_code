@@ -1,6 +1,8 @@
 defmodule EventPromoCode.Event do
   use EventPromoCode.Web, :model
 
+  @derive {Jason.Encoder, except: [:__meta__, :promo_codes]}
+
   schema "events" do
     field :title, :string
     field :description, :string
