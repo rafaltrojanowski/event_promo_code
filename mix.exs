@@ -43,7 +43,8 @@ defmodule EventPromoCode.Mixfile do
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
       {:trailing_format_plug, "~> 0.0.5"},
-      {:jason, "~> 1.0"}
+      {:jason, "~> 1.0"},
+      {:ex_machina, "~> 2.3", only: :test},
     ]
   end
 

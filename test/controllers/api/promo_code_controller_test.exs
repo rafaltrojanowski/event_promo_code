@@ -1,15 +1,9 @@
 defmodule EventPromoCode.Api.PromoCodeControllerTest do
   use EventPromoCode.ConnCase
-
-  alias EventPromoCode.PromoCode
-  alias EventPromoCode.Event
+  import EventPromoCode.Factory
 
   test "/index returns a list of promo codes" do
-    datetime = DateTime.utc_now()
-    event = %Event{start_at: datetime, end_at: datetime, latitude: 11.39, longitude: 10.324}
-    |> Repo.insert!
-    promo_code = %PromoCode{code: "4x2i", amount: 30.00, event_id: event.id, expires_at: datetime}
-    |> Repo.insert!
+    promo_code = insert(:promo_code)
 
     conn = build_conn()
     conn = get conn, api_promo_code_path(conn, :index)
@@ -19,26 +13,22 @@ defmodule EventPromoCode.Api.PromoCodeControllerTest do
         "code" => promo_code.code,
         "amount" => promo_code.amount,
         "event" => %{
-          "id" => event.id,
-          "title" => nil,
-          "description" => nil,
-          "start_at" => DateTime.to_iso8601(event.start_at),
-          "end_at" => DateTime.to_iso8601(event.end_at)
+          "id" => promo_code.event.id,
+          "title" => promo_code.event.title,
+          "description" => promo_code.event.description,
+          "start_at" => DateTime.to_iso8601(promo_code.event.start_at),
+          "end_at" => DateTime.to_iso8601(promo_code.event.end_at)
         },
         "expires_at" => DateTime.to_iso8601(promo_code.expires_at),
         "id" => promo_code.id,
-        "is_active" => true,
-        "radius" => nil
+        "is_active" => promo_code.is_active,
+        "radius" => promo_code.radius
       }]
     }
   end
 
   test "#show renders a single promo code" do
-    datetime = DateTime.utc_now()
-    event = %Event{start_at: datetime, end_at: datetime, latitude: 11.39, longitude: 10.324}
-    |> Repo.insert!
-    promo_code = %PromoCode{code: "4x2i", amount: 30.00, event_id: event.id, expires_at: datetime}
-    |> Repo.insert!
+    promo_code = insert(:promo_code)
 
     conn = build_conn()
     conn = get conn, api_promo_code_path(conn, :show, promo_code)
@@ -48,11 +38,11 @@ defmodule EventPromoCode.Api.PromoCodeControllerTest do
         "code" => promo_code.code,
         "amount" => promo_code.amount,
         "event" => %{
-          "id" => event.id,
-          "title" => nil,
-          "description" => nil,
-          "start_at" => DateTime.to_iso8601(event.start_at),
-          "end_at" => DateTime.to_iso8601(event.end_at)
+          "id" => promo_code.event.id,
+          "title" => promo_code.event.title,
+          "description" => promo_code.event.description,
+          "start_at" => DateTime.to_iso8601(promo_code.event.start_at),
+          "end_at" => DateTime.to_iso8601(promo_code.event.end_at)
         },
         "expires_at" => DateTime.to_iso8601(promo_code.expires_at),
         "id" => promo_code.id,
