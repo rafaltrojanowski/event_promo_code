@@ -6,8 +6,6 @@ defmodule EventPromoCode.Repo do
   alias EventPromoCode.PromoCode
   alias EventPromoCode.Repo
 
-  import Ecto.Query
-
   def promo_code_search(attrs) do
     is_active = get_in(attrs, [:is_active])
 

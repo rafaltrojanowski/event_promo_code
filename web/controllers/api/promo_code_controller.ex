@@ -3,8 +3,8 @@ defmodule EventPromoCode.Api.PromoCodeController do
 
   alias EventPromoCode.PromoCode
 
-  def index(conn, _params) do
-    changeset = changeset(_params)
+  def index(conn, params) do
+    changeset = changeset(params)
     promo_codes = Repo.promo_code_search(changeset.changes)
 
     render(conn, "index.json", promo_codes: promo_codes)
