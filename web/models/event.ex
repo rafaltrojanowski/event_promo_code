@@ -6,8 +6,8 @@ defmodule EventPromoCode.Event do
   schema "events" do
     field :title, :string
     field :description, :string
-    field :latitude, :float
-    field :longitude, :float
+    field :latitude, :float, null: false
+    field :longitude, :float, null: false
     field :start_at, :utc_datetime, null: false
     field :end_at, :utc_datetime, null: false
     has_many :promo_codes, EventPromoCode.PromoCode

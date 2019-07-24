@@ -26,11 +26,28 @@ defmodule EventPromoCode.Services.PromoCodeValidatorTest do
       assert promo_code.id == promo_code.id
     end
 
+    test "returns error if code is valid but not within radius" do
+      insert(:promo_code,
+        code: @code,
+        is_active: true,
+        expires_at: DateTime.from_naive!(~N[2030-12-12 00:00:00], "Etc/UTC")
+      )
+
+      action = PromoCodeValidator.call(%{
+        origin: "Barcelona",
+        destination: "Toronto",
+        code: @code
+      })
+
+      {:error, message} = action
+      assert message == "Promo code is not valid"
+    end
+
     test "returns error when code does not exist" do
       action = PromoCodeValidator.call(%{
         origin: @origin,
         destination: @destination,
-        code: "ZZZZ"
+        code: "not-existing-code"
       })
 
       {:error, message} = action

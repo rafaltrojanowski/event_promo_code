@@ -68,7 +68,7 @@ defmodule EventPromoCode.Api.PromoCodeControllerTest do
         "expires_at" => DateTime.to_iso8601(promo_code.expires_at),
         "id" => promo_code.id,
         "is_active" => true,
-        "radius" => nil
+        "radius" => 100.0
       }
     }
   end

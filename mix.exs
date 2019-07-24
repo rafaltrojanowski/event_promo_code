@@ -44,7 +44,9 @@ defmodule EventPromoCode.Mixfile do
       {:plug, "~> 1.7"},
       {:trailing_format_plug, "~> 0.0.5"},
       {:jason, "~> 1.0"},
-      {:ex_machina, "~> 2.3", only: :test},
+      {:httpoison, "~> 1.4"},
+      {:distance, "~> 0.2.1"},
+      {:ex_machina, "~> 2.3", only: :test}
     ]
   end
 

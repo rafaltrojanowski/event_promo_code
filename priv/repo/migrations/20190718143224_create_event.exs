@@ -3,10 +3,10 @@ defmodule EventPromoCode.Repo.Migrations.CreateEvent do
 
   def change do
     create table(:events) do
-      add :title, :string
-      add :description, :text
-      add :latitude, :float
-      add :longitude, :float
+      add :title, :string, null: false
+      add :description, :text, null: false
+      add :latitude, :float, null: false
+      add :longitude, :float, null: false
 
       timestamps()
     end

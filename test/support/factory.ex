@@ -8,8 +8,10 @@ defmodule EventPromoCode.Factory do
     %EventPromoCode.Event{
       title: title,
       description: description,
+      latitude: 13.767814,
+      longitude: 100.4317543,
       start_at: DateTime.utc_now,
-      end_at: DateTime.utc_now
+      end_at: DateTime.utc_now,
     }
   end
 
@@ -20,6 +22,7 @@ defmodule EventPromoCode.Factory do
     %EventPromoCode.PromoCode{
       code: code,
       amount: amount,
+      radius: 100.00, # km
       expires_at: DateTime.utc_now,
       event: build(:event)
     }
