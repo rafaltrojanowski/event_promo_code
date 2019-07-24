@@ -24,6 +24,7 @@ defmodule EventPromoCode.PromoCode do
     struct
     |> cast(params, [:event_id, :amount, :expires_at, :is_active, :radius, :code])
     |> validate_required([:event_id, :amount, :expires_at, :is_active, :radius, :code])
+    |> unique_constraint(:code)
   end
 
   def by_active(is_active) do
