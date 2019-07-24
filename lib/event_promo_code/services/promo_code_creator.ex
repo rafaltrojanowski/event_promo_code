@@ -1,5 +1,4 @@
 defmodule EventPromoCode.Services.PromoCodeCreator do
-
   alias EventPromoCode.PromoCode
   alias EventPromoCode.Repo
 
@@ -13,5 +12,4 @@ defmodule EventPromoCode.Services.PromoCodeCreator do
       {:error, changeset} -> {:error, changeset}
     end
   end
-
 end
