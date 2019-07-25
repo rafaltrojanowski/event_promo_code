@@ -17,7 +17,22 @@ defmodule EventPromoCode.Api.PromoCodeController do
     end
   end
 
-  # TODO: add update
+  def update(conn, %{"id" => id, "promo_code" => params}) do
+    promo_code = Repo.get!(PromoCode, id)
+    |> Repo.preload(:event)
+
+    changeset = PromoCode.changeset(promo_code, params)
+
+    case Repo.update(changeset) do
+      {:ok, promo_code} ->
+        conn
+        |> render("show.json", promo_code: promo_code)
+      {:error, changeset} ->
+        conn
+        |> put_status(422)
+        |> render(EventPromoCode.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
 
   def index(conn, params) do
     changeset = changeset(params)

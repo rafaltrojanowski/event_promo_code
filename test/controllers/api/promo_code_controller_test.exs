@@ -23,6 +23,37 @@ defmodule EventPromoCode.Api.PromoCodeControllerTest do
     end
   end
 
+  describe "#update" do
+    test "updates and returns promo code when valid", %{conn: conn} do
+      promo_code = insert(:promo_code, is_active: true)
+      conn = put conn, api_promo_code_path(conn, :update, promo_code), promo_code: %{is_active: false}
+
+      assert json_response(conn, 200) == %{
+        "data" => %{
+          "code" => promo_code.code,
+          "amount" => promo_code.amount,
+          "event" => %{
+            "id" => promo_code.event.id,
+            "title" => promo_code.event.title,
+            "description" => promo_code.event.description,
+            "start_at" => DateTime.to_iso8601(promo_code.event.start_at),
+            "end_at" => DateTime.to_iso8601(promo_code.event.end_at)
+          },
+          "expires_at" => DateTime.to_iso8601(promo_code.expires_at),
+          "id" => promo_code.id,
+          "is_active" => false,
+          "radius" => 100.0
+        }
+      }
+    end
+
+    test "returns errors code when not valid", %{conn: conn} do
+      promo_code = insert(:promo_code, is_active: true)
+      conn = put conn, api_promo_code_path(conn, :update, promo_code), promo_code: %{is_active: nil}
+      assert json_response(conn, 422)["errors"] != %{}
+    end
+  end
+
   test "#index returns a list of promo codes" do
     promo_code = insert(:promo_code)
 
