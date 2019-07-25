@@ -46,6 +46,7 @@ defmodule EventPromoCode.Mixfile do
       {:jason, "~> 1.0"},
       {:httpoison, "~> 1.4"},
       {:distance, "~> 0.2.1"},
+      {:google_maps, "~> 0.11"},
       {:ex_machina, "~> 2.3", only: :test}
     ]
   end

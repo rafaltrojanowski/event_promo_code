@@ -11,7 +11,7 @@ defmodule EventPromoCode.Api.PromoCodeValidationControllerTest do
   @blank_attrs %{code: nil, origin: nil, destination: nil}
 
   describe "#create" do
-    test "renders promo code when code is valid", %{conn: conn} do
+    test "renders promo code and directions when code is valid", %{conn: conn} do
       insert(:promo_code,
         code: @create_attrs.code,
         is_active: true,
@@ -20,6 +20,7 @@ defmodule EventPromoCode.Api.PromoCodeValidationControllerTest do
 
       conn = post(conn, api_promo_code_validation_path(conn, :create), promo_code_validation: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
+      assert json_response(conn, 201)["data"]["directions"] != %{}
     end
 
     test "renders errors when code is invalid", %{conn: conn} do

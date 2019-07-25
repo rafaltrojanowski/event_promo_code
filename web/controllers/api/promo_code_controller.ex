@@ -17,6 +17,8 @@ defmodule EventPromoCode.Api.PromoCodeController do
     end
   end
 
+  # TODO: add update
+
   def index(conn, params) do
     changeset = changeset(params)
     promo_codes = Repo.promo_code_search(changeset.changes)

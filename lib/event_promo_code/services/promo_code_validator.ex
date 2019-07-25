@@ -11,15 +11,22 @@ defmodule EventPromoCode.Services.PromoCodeValidator do
     case validate_code(promo_code) do
       {:ok, promo_code} ->
         success = within_radius(promo_code, params.origin, params.destination)
+
         case success do
           true ->
-            {:ok, promo_code}
+            {:ok, promo_code, directions(params.origin, params.destination)}
           false ->
             {:error, @error_msg}
         end
       {:error, error_msg} ->
         {:error, error_msg}
     end
+  end
+
+  defp directions(origin, destination) do
+    key = EventPromoCode.Env.get("GOOGLE_API_KEY")
+    directions = GoogleMaps.directions(origin, destination, key: key)
+    |> elem(1)
   end
 
   defp validate_code(promo_code) do

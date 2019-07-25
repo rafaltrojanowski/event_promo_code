@@ -22,8 +22,9 @@ defmodule EventPromoCode.Services.PromoCodeValidatorTest do
         code: @code
       })
 
-      {:ok, promo_code} = action
+      {:ok, promo_code, directions} = action
       assert promo_code.id == promo_code.id
+      assert directions != %{}
     end
 
     test "returns error if code is valid but not within radius" do

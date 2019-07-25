@@ -9,10 +9,10 @@ defmodule EventPromoCode.Api.PromoCodeValidationController do
 
     if changeset.valid? do
       case PromoCodeValidator.call(changeset.changes) do
-        {:ok, promo_code} ->
+        {:ok, promo_code, directions} ->
           conn
           |> put_status(:created)
-          |> render("show.json", promo_code: promo_code)
+          |> render("show.json", promo_code: promo_code, directions: directions)
         {:error, message} ->
           conn
           |> put_status(422)
