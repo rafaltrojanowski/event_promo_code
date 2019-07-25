@@ -31,6 +31,22 @@ source .env
 source .env && mix test # first command loads env variables before running tests
 ```
 
+## Todo
+- [x] Generation of new promo codes for events
+- [x] The promo code is worth a specific amount of ride
+- [x] The promo code can expire
+- [x] Can be deactivated
+- [x] Return active promo codes
+- [x] Return all promo codes
+- [x] Only valid when user’s pickup or destination is within x radius of the event venue
+- [x] The promo code radius should be configurable
+- [x] To test the validity of the promo code, expose an endpoint that accept origin, destination,
+the promo code. The api should return the promo code details and a polyline using the destination and origin if promo code is valid and an error otherwise.
+
+## Improvements to consider:
+- [ ] - Most likely successful validation of promo code should set is_active to false
+- [ ] - Return active promo codes - endpoint currently returns all active promo codes (including expired), most likely it should filter out expired promo codes
+
 ## Learn more
 
   * Official website: http://www.phoenixframework.org/
