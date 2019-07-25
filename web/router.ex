@@ -18,6 +18,7 @@ defmodule EventPromoCode.Router do
 
     scope "/v1" do
       resources "/promo_codes", PromoCodeController, only: [:show, :index, :create]
+      resources "/promo_codes_validation", PromoCodeValidationController, only: [:create]
     end
   end
 
